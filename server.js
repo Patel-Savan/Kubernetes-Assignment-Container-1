@@ -61,6 +61,7 @@ app.post("/calculate",async (req,res)=>{
             file: null,
             error: "Invalid JSON input."
         }
+        console.log("File Not Found")
 
         res.status(400).json(response)
     }else{
@@ -70,11 +71,12 @@ app.post("/calculate",async (req,res)=>{
         if(fs.existsSync(filePath)){
             
             try{
-                const result = await axios.post("http://container2-service:80/result",body)
+                const result = await axios.post("http://container2-service:81/result",body)
 
                 res.json(result.data)
                 
             }catch(error){
+                console.log(error)
                 if(error.response){
                     res.status(error.response.status).json(error.response.data);
                 }else{
