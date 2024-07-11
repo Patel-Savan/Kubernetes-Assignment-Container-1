@@ -21,7 +21,7 @@ app.post("/store-file", async (req, res) => {
         error: "Invalid JSON input."
       };
 
-      res.status(400).json(response);
+      res.status(400).send(response);
     }
 
     data = data
@@ -43,7 +43,7 @@ app.post("/store-file", async (req, res) => {
           error: "Error while storing the file to the storage."
         };
 
-        res.status(500).json(response);
+        res.status(500).send(response);
       }
 
       const response = {
@@ -51,7 +51,7 @@ app.post("/store-file", async (req, res) => {
         message: "Success."
       };
 
-      res.status(200).json(response);
+      res.status(200).send(response);
     });
   } catch (error) {
     console.log(error);
@@ -71,7 +71,7 @@ app.post("/calculate", async (req, res) => {
       };
       console.log("File Not Found");
 
-      res.status(400).json(response);
+      res.status(400).send(response);
     } else {
       const filePath = "../Savan_PV_dir/" + fileName;
 
@@ -82,13 +82,13 @@ app.post("/calculate", async (req, res) => {
             body
           );
 
-          res.json(result.data);
+          res.send(result.data);
         } catch (error) {
           console.log(error);
           if (error.response) {
-            res.status(error.response.status).json(error.response.data);
+            res.status(error.response.status).send(error.response.data);
           } else {
-            res.status({ error: "Internal Server error" });
+            res.status(500).send({ error: "Internal Server error" });
           }
         }
       } else {
@@ -96,7 +96,7 @@ app.post("/calculate", async (req, res) => {
           file: fileName,
           error: "File not found."
         };
-        res.status(404).json(response);
+        res.status(404).send(response);
       }
     }
   } catch (error) {
