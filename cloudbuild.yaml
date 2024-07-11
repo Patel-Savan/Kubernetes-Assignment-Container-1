@@ -1,0 +1,18 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'us-central1-docker.pkg.dev/kubernetest-assignment/kubernetes-repository/Container-1', '.']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'us-central1-docker.pkg.dev/kubernetest-assignment/kubernetes-repository/Container-1:latest']
+- name: "gcr.io/cloud-builders/gke-deploy"
+  args:
+  - run
+  - --filename=kubernetes/persistentvolume.yaml
+  - --location=us-central1-a
+  - --cluster=kubernetes-assignment-cluster
+- name: "gcr.io/cloud-builders/gke-deploy"
+  args:
+  - run
+  - --filename=kubernetes/deployment.yaml
+  - --image=us-central1-docker.pkg.dev/kubernetest-assignment/kubernetes-repository/Container-1:latest
+  - --location=us-central1-a
+  - --cluster=kubernetes-assignment-cluster

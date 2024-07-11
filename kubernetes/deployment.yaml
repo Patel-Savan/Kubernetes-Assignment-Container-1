@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: container-1-deployment
+  labels:
+    app: container-1-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: container-1-app
+  template:
+    metadata:
+      labels:
+        app: container-1-app
+    spec:
+      containers:
+        - name: Container-1
+          image: us-central1-docker.pkg.dev/kubernetest-assignment/kubernetes-repository/Container-1:latest
+          ports:
+            - containerPort: 6000
+          volumeMounts:
+            - mountPath: /Savan_PV_dir
+              name: data-volume
+      volumes:
+        - name: data-volume
+          persistentVolumeClaim:
+            claimName: kubernetes-assignment-pvc
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: application-service
+spec:
+  selector:
+    app: container-1-app
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 6000
