@@ -15,7 +15,7 @@ spec:
         app: container-1-app
     spec:
       containers:
-        - name: Container-1
+        - name: container-1
           image: us-central1-docker.pkg.dev/kubernetest-assignment/kubernetes-repository/container-1:latest
           ports:
             - containerPort: 6000
