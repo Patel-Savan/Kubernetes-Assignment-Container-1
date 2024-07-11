@@ -28,7 +28,7 @@ app.post("/store-file", async (req,res) => {
         line.split(',').map(field => field.trim()).join(',')
       ).join('\n');
 
-    const filePath = "/data/" + fileName;
+    const filePath = "../Savan_PV_dir/" + fileName;
 
     fs.writeFile(filePath, data, "utf-8", (err) => {
 
@@ -65,7 +65,7 @@ app.post("/calculate",async (req,res)=>{
         res.status(400).json(response)
     }else{
         
-        const filePath = "/data/" + fileName;
+        const filePath = "../Savan_PV_dir/" + fileName;
 
         if(fs.existsSync(filePath)){
             
