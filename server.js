@@ -11,7 +11,7 @@ app.listen(6000)
 app.post("/store-file", async (req,res) => {
 
     const body = req.body;
-
+    console.log(body)
     const fileName = body.file;
     var data = body.data;
 
