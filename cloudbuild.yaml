@@ -3,22 +3,31 @@ steps:
   args: ['build', '-t', 'us-central1-docker.pkg.dev/kubernetest-assignment/kubernetes-repository/Container-1', '.']
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'us-central1-docker.pkg.dev/kubernetest-assignment/kubernetes-repository/Container-1:latest']
-- name: "gcr.io/cloud-builders/gke-deploy"
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: 'gcloud'
   args:
-  - run
-  - --filename=kubernetes/persistentvolume.yaml
-  - --location=us-central1-a
-  - --cluster=kubernetes-assignment-cluster
-- name: "gcr.io/cloud-builders/gke-deploy"
+  - 'container'
+  - 'clusters'
+  - 'get-credentials'
+  - 'kubernetes-assignment-cluster'
+  - '--zone'
+  - 'us-central1-a'
+  - '--project'
+  - 'kubernetest-assignment'
+
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: 'kubectl'
   args:
-  - run
-  - --filename=kubernetes/deployment.yaml
-  - --image=us-central1-docker.pkg.dev/kubernetest-assignment/kubernetes-repository/Container-1:latest
-  - --location=us-central1-a
-  - --cluster=kubernetes-assignment-cluster
+  - 'apply'
+  - '-f'
+  - 'kubernetes/persistentvolume.yaml'
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: 'kubectl'
+  args:
+  - 'apply'
+  - '-f'
+  - 'kubernetes/deployment.yaml'
 
 
 options:
   logging: CLOUD_LOGGING_ONLY
-
-serviceAccount: 607906703465-compute@developer.gserviceaccount.com
