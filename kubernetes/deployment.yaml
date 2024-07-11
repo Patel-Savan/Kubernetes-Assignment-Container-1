@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: Container-1
-          image: us-central1-docker.pkg.dev/kubernetest-assignment/kubernetes-repository/Container-1:latest
+          image: us-central1-docker.pkg.dev/kubernetest-assignment/kubernetes-repository/container-1:latest
           ports:
             - containerPort: 6000
           volumeMounts:

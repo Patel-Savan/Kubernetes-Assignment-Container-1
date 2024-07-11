@@ -1,8 +1,8 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'us-central1-docker.pkg.dev/kubernetest-assignment/kubernetes-repository/Container-1', '.']
+  args: ['build', '-t', 'us-central1-docker.pkg.dev/kubernetest-assignment/kubernetes-repository/container-1', '.']
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'us-central1-docker.pkg.dev/kubernetest-assignment/kubernetes-repository/Container-1:latest']
+  args: ['push', 'us-central1-docker.pkg.dev/kubernetest-assignment/kubernetes-repository/container-1:latest']
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: 'gcloud'
   args:
