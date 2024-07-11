@@ -16,3 +16,9 @@ steps:
   - --image=us-central1-docker.pkg.dev/kubernetest-assignment/kubernetes-repository/Container-1:latest
   - --location=us-central1-a
   - --cluster=kubernetes-assignment-cluster
+
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+serviceAccount: 607906703465-compute@developer.gserviceaccount.com
