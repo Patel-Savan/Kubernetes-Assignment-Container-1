@@ -8,7 +8,7 @@ spec:
     storage: 10Gi
   accessModes:
     - ReadWriteOnce
-  getPersistentDisk:
+  gcePersistentDisk:
     pdName: kubernetes-storage-disk
     fsType: ext4
 
