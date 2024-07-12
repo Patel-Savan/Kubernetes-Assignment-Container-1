@@ -13,7 +13,7 @@ app.post("/store-file", async (req, res) => {
     const body = req.body;
     const fileName = body.file;
     var data = body.data;
-
+    console.log(body);
     if (fileName == null || fileName == "") {
       const response = {
         file: null,
