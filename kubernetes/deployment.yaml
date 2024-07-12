@@ -23,7 +23,7 @@ spec:
             - mountPath: /Savan_PV_dir
               name: data-volume
       imagePullSecrets:
-        - name : my-image-pull-secret
+        - name : kubernetes-image-pull-secret
       volumes:
         - name: data-volume
           persistentVolumeClaim:
